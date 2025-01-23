@@ -46,3 +46,9 @@ TagManager:
   - name: GameObj
     uniqueID: 138406849
     locked: 0
+  - name: Item
+    uniqueID: 3142816271
+    locked: 0
+  - name: TopItem
+    uniqueID: 2150471055
+    locked: 0

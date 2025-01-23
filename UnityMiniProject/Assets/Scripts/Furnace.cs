@@ -1,54 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Furnace : MonoBehaviour
 {
-    private bool isBake = false;
-    private bool collideItem = false;
+    public bool IsBake { get; private set; } = false;
+    public bool CollideItem { get; private set; } = false;
     private readonly float bakeTime = 10f;
     private float curBakingTime;
+    private bool isFinish = false;
 
-    public Image timeCircle;
-    public Image itemImage;
+    public BakeTimeCircle bakeTimeCircle;
+    public BakeCount countPrefeb;
 
     private void Start()
     {
-        timeCircle.gameObject.SetActive(false);
+        //Debug.Log("Start");
     }
 
     private void Update()
     {
-        if(isBake)
+        if(IsBake && bakeTimeCircle.timeCircle.fillAmount < 1)
         {
-            Debug.Log(curBakingTime / bakeTime);
+            bakeTimeCircle.gameObject.SetActive(true);
             curBakingTime += Time.deltaTime;
-            if (curBakingTime > bakeTime)
+            /*if (curBakingTime > bakeTime)
             {
-               isBake = false;
-            }
-            timeCircle.fillAmount = curBakingTime / bakeTime;
+                IsBake = false;
+            }*/
+            bakeTimeCircle.timeCircle.fillAmount = curBakingTime / bakeTime;
+        }
+
+        if(bakeTimeCircle.timeCircle.fillAmount >= 1)
+        {
+            bakeTimeCircle.successText.gameObject.SetActive(true);
+            bakeTimeCircle.timeCircle.color = new Color(1f, 0.5f, 0f);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        collideItem = true;
+        CollideItem = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        collideItem = false;
+        CollideItem = false;
     }
 
     public void BakeItem(Weapon weapon)
     {
-        if (!collideItem)
+        if (!CollideItem)
             return;
 
-        isBake = true;
-        timeCircle.gameObject.SetActive(true);
-        itemImage.sprite = weapon.data.IconSprite;
+        Debug.Log("test");
 
+        IsBake = true;
+        bakeTimeCircle.timeCircle.gameObject.SetActive(true);
+        bakeTimeCircle.itemImage.sprite = weapon.data.IconSprite;
+        bakeTimeCircle.successText.gameObject.SetActive(false);
+    }
+
+    private void OnMouseUp()
+    {
+        if(bakeTimeCircle.timeCircle.fillAmount >= 1)
+        {
+            bakeTimeCircle.gameObject.SetActive(false);
+            bakeTimeCircle.Reset();
+            IsBake = false;
+            curBakingTime = 0;
+            CollideItem = false;
+
+            /*BakeCount temp = Instantiate(countPrefeb);
+            temp.transform.parent = bakeTimeCircle.transform.parent;*/
+        }
     }
 }

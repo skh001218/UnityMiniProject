@@ -12,19 +12,20 @@ public class Weapon : MonoBehaviour
     public SpriteRenderer itemImage;
     public CreateItem itemMgr;
 
-    private bool isCollision = false;
     private Furnace collideFur;
     private Vector2 originPos;
+    private readonly string topItemLayer = "TopItem";
+    private readonly string beforeLayer = "Item";
 
     private void Start()
     {
         originPos = transform.position;
-        
     }
 
     private void OnMouseDown()
     {
         itemMgr.selectWp = this;
+        itemImage.sortingLayerName = topItemLayer;
     }
 
     private void OnMouseDrag()
@@ -35,32 +36,31 @@ public class Weapon : MonoBehaviour
 
     private void OnMouseUp()
     {
-        
         itemMgr.CombineItem();
         itemMgr.selectWp = null;
-        if (collideFur != null)
+        if (collideFur != null && !collideFur.IsBake)
         {
             collideFur.BakeItem(this);
             data = null;
             itemImage.sprite = null;
         }
         transform.position = originPos;
+        itemImage.sortingLayerName = beforeLayer;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isCollision = true;
         if(collision.gameObject.tag == "Furnace")
         {
             collideFur = collision.gameObject.GetComponent<Furnace>();
         }
         //Weapon otherWp = collision.gameObject.GetComponent<Weapon>();
-        itemMgr.combineWp.Add(this);
+        if(data != null) 
+            itemMgr.combineWp.Add(this);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isCollision = false;
         collideFur = null;
         itemMgr.combineWp.Remove(this);
     }
