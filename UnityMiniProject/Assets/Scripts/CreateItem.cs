@@ -7,10 +7,12 @@ using UnityEngine.UI;
 
 public class CreateItem : MonoBehaviour
 {
-    public GameObject item;
     public Slider slider;
-    private readonly float baseTime = 5f;
+    public List<Weapon> combineWp = new List<Weapon>();
+
+    private readonly float baseTime = 2f;
     private float createTime;
+    public Weapon selectWp;
 
     public List<ItemBase> itemBases;
 
@@ -21,11 +23,9 @@ public class CreateItem : MonoBehaviour
         {
             foreach (var itemBase in itemBases)
             {
-                if (itemBase.item == null)
+                if (itemBase.item.data == null)
                 {
-                    itemBase.item = Instantiate(item);
-                    itemBase.item.transform.localPosition = itemBase.transform.position;
-                    itemBase.item.transform.parent = itemBase.transform;
+                    itemBase.item.SetData(DataTableManager.WeaponTable.Get((1, Random.Range(1,5))));
                     break;
                 }
             }
@@ -44,7 +44,7 @@ public class CreateItem : MonoBehaviour
 
     private void CheckItem()
     {
-        List<ItemBase> temp = itemBases.Where(n => n.item == null).ToList();
+        List<ItemBase> temp = itemBases.Where(n => n.item.data == null).ToList();
         if (temp.Count <= 0)
         {
             slider.gameObject.SetActive(false);
@@ -54,5 +54,22 @@ public class CreateItem : MonoBehaviour
             slider.gameObject.SetActive(true);
         }
 
+    }
+
+    public void CombineItem()
+    {
+        if (combineWp.Count <= 1)
+            return;
+
+        Weapon combine1 = combineWp.Find(n => n == selectWp);
+        Weapon combine2 = combineWp.Find(n => n != selectWp);
+
+        if (!(combine1.data.Level == combine2.data.Level && combine1.data.Kind == combine2.data.Kind))
+            return;
+
+        combine1.SetDataEmpty();
+        combine2.SetData(DataTableManager.WeaponTable.Get((combine2.data.Kind, combine2.data.Level + 1)));
+
+        combineWp.Clear();
     }
 }
