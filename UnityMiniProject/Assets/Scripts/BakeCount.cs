@@ -9,7 +9,7 @@ public class BakeCount : MonoBehaviour
     private Vector2 pos;
     private float arriveY;
     private float alphaColor;
-    private float lerfSpeed = 3f;
+    private float lerfSpeed;
 
     public TextMeshProUGUI itemCount;
     public Image itemImage;
@@ -23,10 +23,10 @@ public class BakeCount : MonoBehaviour
     {
         pos = transform.position;
         arriveY = pos.y + 10f;
+        lerfSpeed = 3f;
     }
     private void FixedUpdate()
     {
-        Debug.Log(arriveY);
         pos.y = Mathf.Lerp(pos.y, arriveY, lerfSpeed * Time.deltaTime);
         transform.position = pos;
         if (transform.position.y >= arriveY - 1f)
@@ -39,7 +39,7 @@ public class BakeCount : MonoBehaviour
 
         }
 
-        if(itemImage.color.a == 0)
+        if(itemCount.color.a <= 0.1f)
             Destroy(gameObject);
 
     }

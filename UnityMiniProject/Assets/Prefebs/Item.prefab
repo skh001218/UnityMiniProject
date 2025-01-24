@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemImage: {fileID: 9029636486066681889}
   itemMgr: {fileID: 0}
+  collideFur: {fileID: 0}
 --- !u!61 &4655785642192697237
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -92,7 +93,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.5}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!50 &3276992703386661615
 Rigidbody2D:
@@ -194,14 +195,14 @@ SpriteRenderer:
   m_SortingLayerID: -1152151025
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 5902650331669622779, guid: b04621f87db561d42b5d13d577608ac9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.46875, y: 0.4375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0

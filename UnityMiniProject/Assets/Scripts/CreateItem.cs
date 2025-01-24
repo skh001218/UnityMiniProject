@@ -93,7 +93,7 @@ public class CreateItem : MonoBehaviour
 
     private void RandomData()
     {
-        createItem = DataTableManager.WeaponTable.Get((1, Random.Range(1, 5)));
+        createItem = DataTableManager.WeaponTable.Get((1, Random.Range(1, 1)));
         sliderItemImage.sprite = createItem.IconSprite;
     }
 }

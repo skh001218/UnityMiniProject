@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
     public SpriteRenderer itemImage;
     public CreateItem itemMgr;
 
-    private Furnace collideFur;
+    public Furnace collideFur;
     private Vector2 originPos;
     private readonly string topItemLayer = "TopItem";
     private readonly string beforeLayer = "Item";
@@ -55,7 +55,7 @@ public class Weapon : MonoBehaviour
             collideFur = collision.gameObject.GetComponent<Furnace>();
         }
         //Weapon otherWp = collision.gameObject.GetComponent<Weapon>();
-        if(data != null) 
+        if(data != null && collision.gameObject.tag != "Furnace") 
             itemMgr.combineWp.Add(this);
     }
 

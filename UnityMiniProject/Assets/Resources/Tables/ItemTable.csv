@@ -1,6 +1,6 @@
 Level,Kind,BakeTime,Price,Root
-1,1,9,0,Apple
-2,1,24,0,Avocado
-3,1,35,0,Bacon
-4,1,48,0,Beer
-5,1,60,0,Boar
+1,1,9,0,Silver Ingot
+2,1,24,0,Wooden Sword
+3,1,35,0,Iron Sword
+4,1,48,0,Silver Sword
+5,1,60,0,Golden Sword
