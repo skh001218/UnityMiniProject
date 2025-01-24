@@ -35,7 +35,7 @@ public class WeaponTable : DataTable
     }
 
     private Dictionary<(int, int), WeaponData> items = new();
-    static WeaponData empty = new WeaponData();
+    public static WeaponData empty = new WeaponData();
     public int itemCount = 0;
 
     public override void Load(string filename)

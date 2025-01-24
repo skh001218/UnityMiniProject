@@ -81,7 +81,8 @@ public class CreateItem : MonoBehaviour
         Weapon combine1 = combineWp.Find(n => n == selectWp);
         Weapon combine2 = combineWp.Find(n => n != selectWp);
 
-        if (!(combine1.data.Level == combine2.data.Level && combine1.data.Kind == combine2.data.Kind))
+        if (!(combine1.data.Level == combine2.data.Level && combine1.data.Kind == combine2.data.Kind)
+            || DataTableManager.WeaponTable.Get((combine2.data.Kind, combine2.data.Level + 1)) == empty)
             return;
 
         combine1.SetDataEmpty();

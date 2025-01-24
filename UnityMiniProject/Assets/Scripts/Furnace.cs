@@ -17,7 +17,6 @@ public class Furnace : MonoBehaviour
 
     private void Start()
     {
-        //Debug.Log("Start");
     }
 
     private void Update()
@@ -31,12 +30,15 @@ public class Furnace : MonoBehaviour
                 IsBake = false;
             }*/
             bakeTimeCircle.timeCircle.fillAmount = curBakingTime / bakeTime;
+            
         }
 
         if(bakeTimeCircle.timeCircle.fillAmount >= 1)
         {
             bakeTimeCircle.successText.gameObject.SetActive(true);
             bakeTimeCircle.timeCircle.color = new Color(1f, 0.5f, 0f);
+            
+            
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -54,12 +56,12 @@ public class Furnace : MonoBehaviour
         if (!CollideItem)
             return;
 
-        Debug.Log("test");
-
         IsBake = true;
         bakeTimeCircle.timeCircle.gameObject.SetActive(true);
         bakeTimeCircle.itemImage.sprite = weapon.data.IconSprite;
         bakeTimeCircle.successText.gameObject.SetActive(false);
+        transform.GetChild(0).gameObject.SetActive(false);
+        transform.GetChild(1).gameObject.SetActive(true);
     }
 
     private void OnMouseUp()
@@ -71,7 +73,9 @@ public class Furnace : MonoBehaviour
             IsBake = false;
             curBakingTime = 0;
             CollideItem = false;
-
+            transform.GetChild(0).gameObject.SetActive(true);
+            transform.GetChild(1).gameObject.SetActive(false);
+            
             /*BakeCount temp = Instantiate(countPrefeb);
             temp.transform.parent = bakeTimeCircle.transform.parent;*/
         }

@@ -32,8 +32,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6171530066603102161}
   - {fileID: 1967178653664695722}
+  - {fileID: 6171530066603102161}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4655531965266129772
@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bakeTimeCircle: {fileID: 0}
+  countPrefeb: {fileID: 3538080170288607411, guid: a9030413b6fe04a4b9eb18525c4d34b1, type: 3}
 --- !u!50 &6743109928989946912
 Rigidbody2D:
   serializedVersion: 4
@@ -108,7 +109,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.009438932, y: -0.20595717}
+  m_Offset: {x: -0.00043344498, y: 0.019748747}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -119,7 +120,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7972151, y: 0.7186105}
+  m_Size: {x: 0.7956797, y: 0.8417908}
   m_EdgeRadius: 0
 --- !u!1001 &530655463605371794
 PrefabInstance:
@@ -129,6 +130,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 575215737590375558}
     m_Modifications:
+    - target: {fileID: 2022563481512564280, guid: 666866e92b4852b4f95fdcee60fa03cf, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022563481512564280, guid: 666866e92b4852b4f95fdcee60fa03cf, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2022563481512564280, guid: 666866e92b4852b4f95fdcee60fa03cf, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2022563481512564280, guid: 666866e92b4852b4f95fdcee60fa03cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -173,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Furnace_FireEmpty
       objectReference: {fileID: 0}
+    - target: {fileID: 3178655402294071348, guid: 666866e92b4852b4f95fdcee60fa03cf, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -191,6 +208,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 575215737590375558}
     m_Modifications:
+    - target: {fileID: 1406207223782083404, guid: 7efc2de1914d06f4c87014bcef4a6c1c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406207223782083404, guid: 7efc2de1914d06f4c87014bcef4a6c1c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1406207223782083404, guid: 7efc2de1914d06f4c87014bcef4a6c1c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1406207223782083404, guid: 7efc2de1914d06f4c87014bcef4a6c1c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -234,6 +263,10 @@ PrefabInstance:
     - target: {fileID: 4254000543393318768, guid: 7efc2de1914d06f4c87014bcef4a6c1c, type: 3}
       propertyPath: m_Name
       value: Furnace_FireNotEmpty
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254000543393318768, guid: 7efc2de1914d06f4c87014bcef4a6c1c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
