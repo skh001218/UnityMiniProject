@@ -22,6 +22,11 @@ public class Weapon : MonoBehaviour
         originPos = transform.position;
     }
 
+    private void Update()
+    {
+        //touchMove();
+    }
+
     private void OnMouseDown()
     {
         itemMgr.selectWp = this;
@@ -75,5 +80,28 @@ public class Weapon : MonoBehaviour
     {
         this.data = null;
         itemImage.sprite = null;
+    }
+
+    private void touchMove()
+    {
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    OnMouseDown();
+                    break;
+                case TouchPhase.Stationary:
+                case TouchPhase.Moved:
+                    OnMouseDrag();
+                    break;
+                case TouchPhase.Ended:
+                case TouchPhase.Canceled:
+                    OnMouseUp();
+                    break;
+            }
+        }
     }
 }
