@@ -11,6 +11,7 @@ public class CreateItem : MonoBehaviour
     public Slider slider;
     public Image sliderItemImage;
     public List<Weapon> combineWp = new List<Weapon>();
+    public List<Weapon> moveWp = new List<Weapon>();
 
     private readonly float baseTime = 2f;
     private float createTime;
@@ -95,5 +96,19 @@ public class CreateItem : MonoBehaviour
     {
         createItem = DataTableManager.WeaponTable.Get((1, Random.Range(1, 1)));
         sliderItemImage.sprite = createItem.IconSprite;
+    }
+
+    public void MoveItem()
+    {
+        if (moveWp.Count < 1 || selectWp == null || combineWp.Count >= 2)
+            return;
+        if (moveWp[moveWp.Count - 1].data != null)
+        {
+            combineWp.Add(moveWp[moveWp.Count - 1]);
+            moveWp.Clear();
+            return;
+        }
+        moveWp[moveWp.Count - 1].SetData(selectWp.data);
+        selectWp.SetDataEmpty();
     }
 }

@@ -29,6 +29,8 @@ public class Weapon : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (data == null)
+            return;
         itemMgr.selectWp = this;
         itemImage.sortingLayerName = topItemLayer;
     }
@@ -41,6 +43,7 @@ public class Weapon : MonoBehaviour
 
     private void OnMouseUp()
     {
+        itemMgr.MoveItem();
         itemMgr.CombineItem();
         itemMgr.selectWp = null;
         if (collideFur != null && !collideFur.IsBake)
@@ -51,10 +54,12 @@ public class Weapon : MonoBehaviour
         }
         transform.position = originPos;
         itemImage.sortingLayerName = beforeLayer;
+        itemMgr.moveWp.Clear();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if(collision.gameObject.tag == "Furnace")
         {
             collideFur = collision.gameObject.GetComponent<Furnace>();
@@ -62,6 +67,9 @@ public class Weapon : MonoBehaviour
         //Weapon otherWp = collision.gameObject.GetComponent<Weapon>();
         if(data != null && collision.gameObject.tag != "Furnace") 
             itemMgr.combineWp.Add(this);
+        if (data == null && collision.gameObject.tag != "Furnace")
+            itemMgr.moveWp.Add(this);
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -82,26 +90,4 @@ public class Weapon : MonoBehaviour
         itemImage.sprite = null;
     }
 
-    private void touchMove()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
-                    OnMouseDown();
-                    break;
-                case TouchPhase.Stationary:
-                case TouchPhase.Moved:
-                    OnMouseDrag();
-                    break;
-                case TouchPhase.Ended:
-                case TouchPhase.Canceled:
-                    OnMouseUp();
-                    break;
-            }
-        }
-    }
 }

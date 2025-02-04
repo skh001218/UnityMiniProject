@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,8 +16,14 @@ public class GameManager : MonoBehaviour
 
     private List<Guest> guests = new List<Guest>();
 
+    private int size = 15;
+    private UnityEngine.Color color = UnityEngine.Color.red;
+    private float deltaTime = 0f;
+
     private void Start()
     {
+        Application.targetFrameRate = -1;
+
         //가로 고정 ( 화면에 따라 위 아래가 더 찍힘 )
         arrows = GameObject.FindGameObjectsWithTag("Arrow");
         Vector2 temp = Camera.main.ScreenToWorldPoint(new Vector3(Screen.safeArea.x, Screen.safeArea.y));
@@ -30,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+
         guestTime += Time.deltaTime;
 
         if (guestTime > spawnGuestTime)
@@ -81,5 +90,21 @@ public class GameManager : MonoBehaviour
         int idx = Random.Range(0, guests.Count);
         if(!guests[idx].isSelect)
             guests[idx].isSelect = true;
+    }
+
+    private void OnGUI()
+    {
+        GUIStyle style = new GUIStyle();
+
+        Rect rect = new Rect(0, 0, Screen.width, Screen.height);
+        style.alignment = TextAnchor.UpperLeft;
+        style.fontSize = size;
+        style.normal.textColor = color;
+
+        float ms = deltaTime * 1000f;
+        float fps = 1.0f / deltaTime;
+        string text = string.Format("{0:0.} FPS ({1:0.0} ms)", fps, ms);
+
+        GUI.Label(rect, text, style);
     }
 }
