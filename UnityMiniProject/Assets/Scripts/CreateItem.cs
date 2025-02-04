@@ -18,6 +18,7 @@ public class CreateItem : MonoBehaviour
     private WeaponData createItem;
 
     public Weapon selectWp;
+    public List<Furnace> collideFur = new List<Furnace>();
 
     public List<ItemBase> itemBases;
 

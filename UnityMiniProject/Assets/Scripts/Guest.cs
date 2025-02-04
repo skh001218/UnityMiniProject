@@ -14,13 +14,14 @@ public class Guest : MonoBehaviour
 
     public GameObject wayPoint;
     private List<Transform> wayPoints = new List<Transform>();
-    private int posNum = 0;
+    public int posNum = 0;
     public GameObject rightPos;
     public GameObject leftPos;
     private float endPos;
 
     private float prePosX;
 
+    private bool isCal;
 
     private void Start()
     {
@@ -42,6 +43,7 @@ public class Guest : MonoBehaviour
             transform.position = new Vector2(leftPos.transform.position.x, leftPos.transform.position.y - 10f);
             isRight = true;
             endPos = rightPos.transform.position.x;
+            transform.localScale = new Vector3(-1, 1, 1);
         }
 
         prePosX = transform.position.x;
@@ -55,18 +57,37 @@ public class Guest : MonoBehaviour
         }
         else
         {
+            if (isCal)
+                return;
 
-            if(transform.position.x != wayPoints[0].position.x && posNum == 0)
+            if(transform.position.x > wayPoints[posNum].position.x)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-1, 1, 1);
+            }
+
+            if (transform.position.x != wayPoints[0].position.x && posNum == 0)
             {
                 transform.position = Vector2.MoveTowards(transform.position,
                     new Vector2(wayPoints[posNum].position.x, transform.position.y), speed * Time.deltaTime);
                 return;
             }
-                
+
+
+            
             transform.position = Vector2.MoveTowards(transform.position, wayPoints[posNum].position, speed * Time.deltaTime);
-            if (transform.position == wayPoints[posNum].position )
+
+            if (Vector3.Distance(transform.position, wayPoints[posNum].position) < 0.1f)
+            {
+                if (gm.CheckWayPoint(this) && posNum != wayPoints.Count - 1)
+                    return;
                 posNum++;
-            if(posNum == wayPoints.Count)
+            }
+
+            if (posNum == wayPoints.Count)
             {
                 gm.RemoveGuest(this);
                 Destroy(gameObject);

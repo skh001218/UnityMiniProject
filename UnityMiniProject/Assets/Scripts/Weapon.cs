@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Pipes;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -46,15 +47,19 @@ public class Weapon : MonoBehaviour
         itemMgr.MoveItem();
         itemMgr.CombineItem();
         itemMgr.selectWp = null;
+        if(itemMgr.collideFur.Count > 0)
+            collideFur = itemMgr.collideFur.Last();
         if (collideFur != null && !collideFur.IsBake)
         {
             collideFur.BakeItem(this);
             data = null;
             itemImage.sprite = null;
         }
+        
         transform.position = originPos;
         itemImage.sortingLayerName = beforeLayer;
         itemMgr.moveWp.Clear();
+        itemMgr.collideFur.Clear();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -62,7 +67,7 @@ public class Weapon : MonoBehaviour
 
         if(collision.gameObject.tag == "Furnace")
         {
-            collideFur = collision.gameObject.GetComponent<Furnace>();
+            itemMgr.collideFur.Add(collision.gameObject.GetComponent<Furnace>());
         }
         //Weapon otherWp = collision.gameObject.GetComponent<Weapon>();
         if(data != null && collision.gameObject.tag != "Furnace") 
