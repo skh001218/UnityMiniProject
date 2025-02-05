@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO.Pipes;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using static WeaponTable;
 
 public class Weapon : MonoBehaviour

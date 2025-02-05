@@ -21,6 +21,11 @@ public static class DataTableManager
         var weaponTableId = DataTableIds.weapon;
         weaponTable.Load(weaponTableId);
         tables.Add(weaponTableId, weaponTable);
+
+        var sellItemTable = new SellItemTable();
+        var sellItemTableId = DataTableIds.sellItem;
+        sellItemTable.Load(sellItemTableId);
+        tables.Add(sellItemTableId, sellItemTable);
     }
 
     public static T Get<T>(string id) where T : DataTable
@@ -37,6 +42,14 @@ public static class DataTableManager
         get
         {
             return Get<WeaponTable>(DataTableIds.weapon);
+        }
+    }
+
+    public static SellItemTable SellItemTable
+    {
+        get
+        {
+            return Get<SellItemTable>(DataTableIds.sellItem);
         }
     }
 }

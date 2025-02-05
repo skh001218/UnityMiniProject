@@ -16,13 +16,11 @@ public class SellAreaMgr : MonoBehaviour
     public Transform limitUp;
     public Transform limitDown;
 
+    public Repository repository;
+
     private void Start()
     {
-    }   
-
-    private void Update()
-    {
-        
+        repository.UpdatePlate();
     }
 
     private void FixedUpdate()
@@ -33,12 +31,15 @@ public class SellAreaMgr : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (repository.gameObject.activeSelf)
+            return;
         startPos = Input.mousePosition;
     }
 
     private void OnMouseDrag()
     {
-
+        if (repository.gameObject.activeSelf)
+            return;
         moveDir =  startPos - (Vector2)Input.mousePosition;
         moveDir.Normalize();
 

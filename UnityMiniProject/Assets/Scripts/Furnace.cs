@@ -10,6 +10,8 @@ public class Furnace : MonoBehaviour
     public bool CollideItem { get; private set; } = false;
     private float bakeTime = 10f;
     private float curBakingTime;
+    private Weapon item;
+    public Repository repository;
 
     public BakeTimeCircle bakeTimeCircle;
     public BakeCount countPrefeb;
@@ -52,9 +54,10 @@ public class Furnace : MonoBehaviour
             return;
 
         IsBake = true;
-        bakeTime = weapon.data.BakeTime;
+        item = weapon;
+        bakeTime = item.data.BakeTime;
         bakeTimeCircle.timeCircle.gameObject.SetActive(true);
-        bakeTimeCircle.itemImage.sprite = weapon.data.IconSprite;
+        bakeTimeCircle.itemImage.sprite = item.data.IconSprite;
         bakeTimeCircle.successText.gameObject.SetActive(false);
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(true);
@@ -64,6 +67,9 @@ public class Furnace : MonoBehaviour
     {
         if(bakeTimeCircle.timeCircle.fillAmount >= 1)
         {
+            if (!repository.SetItemInPlate(item.data.Id))
+                return;
+
             BakeCount temp = Instantiate(countPrefeb, bakeTimeCircle.transform.position, Quaternion.identity);
             temp.transform.SetParent(bakeTimeCircle.transform.parent);
             temp.itemImage.sprite = bakeTimeCircle.itemImage.sprite;
@@ -73,6 +79,7 @@ public class Furnace : MonoBehaviour
             IsBake = false;
             curBakingTime = 0;
             CollideItem = false;
+            item = null;
             transform.GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(false);
             

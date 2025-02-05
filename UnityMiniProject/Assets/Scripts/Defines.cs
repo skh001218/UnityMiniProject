@@ -7,5 +7,6 @@ public static class Defines
     public static class DataTableIds
     {
         public static readonly string weapon = "ItemTable";
+        public static readonly string sellItem = "SellItemTable";
     }
 }

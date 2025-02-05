@@ -16,7 +16,7 @@ public class WeaponTable : DataTable
 
         private readonly string imagePath = "Sprite/{0}";
 
-        //public string Id { get; set; }
+        public string Id { get; set; }
         public int Level { get; set; }
         public int Kind { get; set; }
         public float BakeTime { get; set; }
