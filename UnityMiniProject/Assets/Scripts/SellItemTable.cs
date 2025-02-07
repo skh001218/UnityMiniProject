@@ -13,23 +13,27 @@ public class SellItemTable : DataTable
             Sword,
             Arrow
         }
-
         private readonly string imagePath = "Sprite/{0}";
 
-        public string Id { get; set; }
+        public string ID { get; set; }
+        public string Division { get; set; }
         public int Level { get; set; }
         public int Kind { get; set; }
-        public float BakeTime { get; set; }
-        /*public bool Useable { get; set; }*/
+        public int AcquisitionsCount { get; set; }
+        public int SwordStorage { get; set; }
+        public int Overlaps { get; set; }
+        public string DoughID { get; set; }
+        public string RecipeID { get; set; }
         public int Price { get; set; }
-        public string Root { get; set; }
-        public string BakeItemId { get; set; }
+
+        public int Sale {  get; set; }
+        public string ImageFileName { get; set; }
 
         public Sprite IconSprite
         {
             get
             {
-                var sprite = Resources.Load<Sprite>($"{string.Format(imagePath, Root)}");
+                var sprite = Resources.Load<Sprite>($"{string.Format(imagePath, ImageFileName)}");
                 return sprite;
             }
         }
@@ -48,9 +52,9 @@ public class SellItemTable : DataTable
         items.Clear();
         list.ForEach(x =>
         {
-            if (!items.ContainsKey(x.Id))
+            if (!items.ContainsKey(x.ID))
             {
-                items.Add(x.Id, x);
+                items.Add(x.ID, x);
             }
             else Debug.Log("Å° Áßº¹");
         }
@@ -71,7 +75,7 @@ public class SellItemTable : DataTable
     {
         foreach (var item in items)
         {
-            if (item.Value.BakeItemId == key)
+            if (item.Value.DoughID == key)
                 return item.Value;
         }
         return empty;

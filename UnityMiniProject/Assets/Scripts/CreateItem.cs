@@ -84,24 +84,24 @@ public class CreateItem : MonoBehaviour
         Weapon combine2 = combineWp.Find(n => n != selectWp);
 
         if (!(combine1.data.Level == combine2.data.Level && combine1.data.Kind == combine2.data.Kind)
-            || DataTableManager.WeaponTable.Get((combine2.data.Kind, combine2.data.Level + 1)) == empty)
+            || DataTableManager.WeaponTable.GetToLevelAndKind(combine2.data.Level + 1, combine2.data.Kind) == empty)
             return;
 
         combine1.SetDataEmpty();
-        combine2.SetData(DataTableManager.WeaponTable.Get((combine2.data.Kind, combine2.data.Level + 1)));
+        combine2.SetData(DataTableManager.WeaponTable.GetToLevelAndKind(combine2.data.Level + 1, combine2.data.Kind));
 
         combineWp.Clear();
     }
 
     private void RandomData()
     {
-        createItem = DataTableManager.WeaponTable.Get((1, Random.Range(1, 1)));
+        createItem = DataTableManager.WeaponTable.GetToLevelAndKind(1, 1);
         sliderItemImage.sprite = createItem.IconSprite;
     }
 
     public void MoveItem()
     {
-        if (moveWp.Count < 1 || selectWp == null || combineWp.Count >= 2)
+        if (moveWp.Count < 1 || selectWp == null || combineWp.Count >= 2 || collideFur.Count > 0)
             return;
         if (moveWp[moveWp.Count - 1].data != null)
         {

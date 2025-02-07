@@ -1,6 +1,9 @@
-Id,Level,Kind,BakeTime,Price,Root
-abc123,1,1,9,0,Silver Ingot
-qwe123,2,1,24,0,Wooden Sword
-zxc123,3,1,35,0,Iron Sword
-vbn123,4,1,48,0,Silver Sword
-ghj123,5,1,60,0,Golden Sword
+ID,Division,Level,Kind,ProductionTime,DropCount,BakingTime,Sale,ItemID,EffectID,RecipeID,ImageFileName
+00001012,철괴광석,1,1,30,1,10,2,00001051,1,1,Silver Ingot
+00002112,나무 칼광석,2,1,30,1,25,2,00002151,1,1,Wooden Sword
+00003112,철 칼광석,3,1,30,1,35,2,00003151,1,1,Iron Sword
+00004112,은 칼광석,4,1,30,1,48,2,00004151,1,1,Silver Sword
+00005112,금 칼광석,5,1,30,1,64,2,00005151,1,1,Golden Sword
+00006212,나무 활광석,6,2,30,1,82,2,00006251,1,1,Bow
+00007212,철 활광석,7,2,30,1,102,2,00007251,1,1,Iron Bow
+00008212,은 활광석,8,2,30,1,124,2,00008251,1,1,Silver Bow

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+
 using static SellItemTable;
 
 public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
@@ -18,7 +19,7 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
         deploy = GetComponentInChildren<Button>(includeInactive: true);
         repository = FindObjectOfType<Repository>(includeInactive: true);
 
-        deploy.onClick.AddListener(repository.OnClickDeploy);
+        deploy.onClick.AddListener(OnClickDeploy);
     }
 
     private void Update()
@@ -38,10 +39,16 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
         }
         else
         {
-            Debug.Log(data.Id);
+            GetComponent<Image>().sprite = data.IconSprite;
         }
     }
 
+    private void OnClickDeploy()
+    {
+        repository.OnDeploy(data);
+        data = null;
+        GetComponent<Image>().sprite = null;
+    }
     public SellItemData GetItem() => data;
 
     public void OnDrag(PointerEventData eventData)
@@ -56,6 +63,9 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (data == null || data == empty)
+            return;
+
         repository.SelectCancelAll();
         isSelect = true;
     }

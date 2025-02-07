@@ -7,12 +7,15 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> areaList;
-    public GameObject test2;
     public Guest[] guestPrefeb;
     public GameObject[] arrows;
+
+    public SellAreaMgr sellAreaMgr;
+    public StandMgr standMgr;
+
     private int curArea = 0;
 
-    private float spawnGuestTime = 5f;
+    public float spawnGuestTime = 5f;
     private float guestTime = 0f;
 
     private List<Guest> guests = new List<Guest>();
@@ -28,38 +31,30 @@ public class GameManager : MonoBehaviour
     {
         Application.targetFrameRate = -1;
 
-        /*int setWidth = 1080; // 사용자 설정 너비
-        int setHeight = 1920; // 사용자 설정 높이
+        Camera camera = Camera.main;
+        Rect rect = camera.rect;
+        float scaleheight = ((float)Screen.width / Screen.height) / (9f / 16f);
+        float scalewidth = 1f / scaleheight;
 
-        int deviceWidth = Screen.width; // 기기 너비 저장
-        int deviceHeight = Screen.height; // 기기 높이 저장
-
-        Screen.SetResolution(setWidth, setHeight, true);*/
+        // 위 아래 공백 생성 (휴대폰이 날씬한 경우)
+        if (scaleheight < 1)
+        {
+            Camera.main.orthographicSize = Screen.height / (Screen.width / 16f) * 9f;
+        }
+        // 좌 우 공백 생성 (휴대폰이 뚱뚱한 경우)
+        else
+        {
+            rect.width = scalewidth;
+            rect.x = (1f - scalewidth) / 2f;
+        }
+        camera.rect = rect;
 
         
-
 
         //가로 고정 ( 화면에 따라 위 아래가 더 찍힘 )
         arrows = GameObject.FindGameObjectsWithTag("Arrow");
-        Vector2 temp = Camera.main.ScreenToWorldPoint(new Vector3(Screen.safeArea.x, Screen.safeArea.y));
-        
-        if(temp.x > test2.GetComponent<BoxCollider2D>().bounds.min.x)
-        {
-            while (temp.x > test2.GetComponent<BoxCollider2D>().bounds.min.x)
-            {
-                temp = Camera.main.ScreenToWorldPoint(new Vector3(Screen.safeArea.x, Screen.safeArea.y));
-                Camera.main.orthographicSize += 0.1f;
-            }
-        }
-        /*else if(temp.x < test2.GetComponent<BoxCollider2D>().bounds.min.x)
-        {
-            while (temp.x < test2.GetComponent<BoxCollider2D>().bounds.min.x)
-            {
-                temp = Camera.main.ScreenToWorldPoint(new Vector3(Screen.safeArea.x, Screen.safeArea.y));
-                Camera.main.orthographicSize -= 0.1f;
-            }
-        }*/
-        
+
+        sellAreaMgr.SetCameraArea();
     }
 
     private void Update()
@@ -76,6 +71,7 @@ public class GameManager : MonoBehaviour
             go.gameObject.SetActive(true); // 임시
             go.transform.SetParent(areaList[1].transform);
             go.transform.localScale = Vector3.one;
+            go.standMgr = standMgr;
             guestTime = 0f;
             guests.Add(go);
         }
@@ -127,6 +123,9 @@ public class GameManager : MonoBehaviour
         int idx = Random.Range(0, guests.Count);
         if(!guests[idx].isSelect)
             guests[idx].isSelect = true;
+
+        guests[idx].SetWayPoint();
+
     }
 
     public bool CheckWayPoint(Guest guest)

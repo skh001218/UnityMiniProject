@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO.Pipes;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Device;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
 
 public class SellAreaMgr : MonoBehaviour
 {
     private Vector2 startPos;
     private Vector2 moveDir;
     private Vector3 cameraPos;
+    public bool isDrag = false;
 
     public Transform limitUp;
     public Transform limitDown;
@@ -21,9 +22,11 @@ public class SellAreaMgr : MonoBehaviour
     private void Start()
     {
         repository.UpdatePlate();
+
+        
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         float temp = Mathf.Clamp(Camera.main.transform.position.y, limitDown.position.y, limitUp.position.y);
         Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, temp, Camera.main.transform.position.z);
@@ -40,6 +43,9 @@ public class SellAreaMgr : MonoBehaviour
     {
         if (repository.gameObject.activeSelf)
             return;
+
+        isDrag = true;
+
         moveDir =  startPos - (Vector2)Input.mousePosition;
         moveDir.Normalize();
 
@@ -48,17 +54,27 @@ public class SellAreaMgr : MonoBehaviour
             return;
 
         Camera.main.transform.position = new Vector3(Camera.main.transform.position.x,
-            Camera.main.transform.position.y + moveDir.y, -10f);
+            Camera.main.transform.position.y + moveDir.y * 5f, -10f);
 
         
     }
 
     private void OnMouseUp()
     {
+        isDrag = false;
+        startPos = Vector2.zero;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
+    }
+
+    public void SetCameraArea()
+    {
+        var cam = Camera.main;
+
+        limitUp.position = new Vector2(limitUp.position.x, limitUp.position.y - cam.orthographicSize);
+        limitDown.position = new Vector2(limitDown.position.x, limitDown.position.y + cam.orthographicSize);
     }
 }

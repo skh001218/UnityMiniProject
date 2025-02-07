@@ -45,10 +45,11 @@ public class Weapon : MonoBehaviour
         itemMgr.MoveItem();
         itemMgr.CombineItem();
         itemMgr.selectWp = null;
-        if(itemMgr.collideFur.Count > 0)
+        if(itemMgr.collideFur.Count > 0 && data != null)
             collideFur = itemMgr.collideFur.Last();
         if (collideFur != null && !collideFur.IsBake)
         {
+            Debug.Log(data.ID);
             collideFur.BakeItem(this);
             data = null;
             itemImage.sprite = null;

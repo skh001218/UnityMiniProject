@@ -1,20 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SellItemTable;
 
 public class Stand : MonoBehaviour
 {
     public Repository repository;
+    public GameManager gameManager;
+    public StandMgr standMgr;
+    public Transform wayPoint;
+    public float magY = 50f;
+    public SpriteRenderer image;
+
+    public int itemCount;
+    public SellItemData data;
 
     private void Start()
     {
         repository = FindObjectOfType<Repository>(includeInactive: true);
+        image.gameObject.SetActive(false);
     }
     private void Update()
     {
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
+            if (gameManager.sellAreaMgr.isDrag || repository.gameObject.activeSelf)
+                return;
             var wPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var hit = Physics2D.Raycast(wPos, Vector2.zero, 1, LayerMask.GetMask("Stand"));
             if (hit.collider != null && hit.collider.gameObject == gameObject)
@@ -25,9 +37,10 @@ public class Stand : MonoBehaviour
         }
 
 #elif UNITY_ANDROID
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-
+            if (gameManager.sellAreaMgr.isDrag || repository.gameObject.activeSelf)
+                return;
             var wPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var hit = Physics2D.Raycast(wPos, Vector2.zero, 1, LayerMask.GetMask("Stand"));
             if (hit.collider != null && hit.collider.gameObject == gameObject)
@@ -39,5 +52,32 @@ public class Stand : MonoBehaviour
             }
         }
 #endif
+    }
+
+    public void PickUpItem()
+    {
+        itemCount--;
+        if (itemCount == 0)
+        {
+            data = null;
+            image.sprite = null;
+        }
+    }
+
+    public void SetItemData(SellItemData data)
+    {
+        this.data = data;
+        image.gameObject.SetActive(true);
+        image.sprite = this.data.IconSprite;
+        itemCount = 5;
+    }
+
+    public void SetWayPoint(Transform parent)
+    {
+        GameObject go = new GameObject("wayPoint");
+        go.transform.SetParent(parent);
+        go.transform.position = gameObject.transform.position;
+        wayPoint = go.transform;
+        wayPoint.position = new Vector2(wayPoint.position.x, wayPoint.position.y - magY);
     }
 }

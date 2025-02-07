@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using static SellItemTable;
 
 public class WeaponTable : DataTable
 {
@@ -16,25 +17,29 @@ public class WeaponTable : DataTable
 
         private readonly string imagePath = "Sprite/{0}";
 
-        public string Id { get; set; }
+        public string ID { get; set; }
+        public string Division { get; set; }
         public int Level { get; set; }
         public int Kind { get; set; }
-        public float BakeTime { get; set; }
-        /*public bool Useable { get; set; }*/
-        public int Price { get; set; }
-        public string Root { get; set; }
-
+        public float ProductionTime { get; set; }
+        public int DropCount { get; set; }
+        public float BakingTime { get; set; }
+        public int Sale { get; set; }
+        public string ItemID { get; set; }
+        public string EffectID { get; set; }
+        public string RecipeID { get; set; }
+        public string ImageFileName { get; set; }
         public Sprite IconSprite
         {
             get
             {
-                var sprite = Resources.Load<Sprite>($"{string.Format(imagePath, Root)}");
+                var sprite = Resources.Load<Sprite>($"{string.Format(imagePath, ImageFileName)}");
                 return sprite;
             }
         }
     }
 
-    private Dictionary<(int, int), WeaponData> items = new();
+    private Dictionary<string, WeaponData> items = new();
     public static WeaponData empty = new WeaponData();
     public int itemCount = 0;
 
@@ -47,9 +52,9 @@ public class WeaponTable : DataTable
         items.Clear();
         list.ForEach(x =>
         {
-            if (!items.ContainsKey((x.Kind, x.Level)))
+            if (!items.ContainsKey((x.ID)))
             {
-                items.Add((x.Kind, x.Level), x);
+                items.Add((x.ID), x);
             }
             else Debug.Log("Å° Áßº¹");
         }
@@ -57,12 +62,22 @@ public class WeaponTable : DataTable
         itemCount = items.Count;
     }
 
-    public WeaponData Get((int, int) key)
+    public WeaponData Get(string key)
     {
         if (!items.ContainsKey(key))
         {
             return empty;
         }
         return items[key];
+    }
+
+    public WeaponData GetToLevelAndKind(int level, int kind)
+    {
+        foreach (var item in items)
+        {
+            if (item.Value.Level == level && item.Value.Kind == kind)
+                return item.Value;
+        }
+        return empty;
     }
 }

@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static WeaponTable;
 
 public class Furnace : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class Furnace : MonoBehaviour
     public bool CollideItem { get; private set; } = false;
     private float bakeTime = 10f;
     private float curBakingTime;
-    private Weapon item;
+    public WeaponData item;
     public Repository repository;
 
     public BakeTimeCircle bakeTimeCircle;
@@ -54,10 +56,10 @@ public class Furnace : MonoBehaviour
             return;
 
         IsBake = true;
-        item = weapon;
-        bakeTime = item.data.BakeTime;
+        item = DataTableManager.WeaponTable.Get(weapon.data.ID);
+        bakeTime = item.BakingTime;
         bakeTimeCircle.timeCircle.gameObject.SetActive(true);
-        bakeTimeCircle.itemImage.sprite = item.data.IconSprite;
+        bakeTimeCircle.itemImage.sprite = item.IconSprite;
         bakeTimeCircle.successText.gameObject.SetActive(false);
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(true);
@@ -67,7 +69,8 @@ public class Furnace : MonoBehaviour
     {
         if(bakeTimeCircle.timeCircle.fillAmount >= 1)
         {
-            if (!repository.SetItemInPlate(item.data.Id))
+            Debug.Log(item.ID);
+            if (!repository.SetItemInPlate(item.ID))
                 return;
 
             BakeCount temp = Instantiate(countPrefeb, bakeTimeCircle.transform.position, Quaternion.identity);
