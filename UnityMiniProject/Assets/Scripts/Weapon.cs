@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.IO.Pipes;
 using System.Linq;
 using UnityEngine;
@@ -82,9 +83,9 @@ public class Weapon : MonoBehaviour
         itemMgr.combineWp.Remove(this);
     }
 
-    public void SetData(WeaponData data)
+    public void SetData(string data)
     {
-        this.data = data;
+        this.data = DataTableManager.WeaponTable.Get(data);
         itemImage.sprite = this.data.IconSprite;
     }
 

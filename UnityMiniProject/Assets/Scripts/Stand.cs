@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static SellItemTable;
 
@@ -15,6 +16,8 @@ public class Stand : MonoBehaviour
     public int itemCount;
     public SellItemData data;
 
+    public TextMeshProUGUI tempCountText;
+
     private void Start()
     {
         repository = FindObjectOfType<Repository>(includeInactive: true);
@@ -22,6 +25,7 @@ public class Stand : MonoBehaviour
     }
     private void Update()
     {
+        tempCountText.text = itemCount.ToString();
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {

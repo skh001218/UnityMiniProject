@@ -7,7 +7,6 @@ using static SellItemTable;
 
 public class Repository : MonoBehaviour
 {
-    private readonly string plateTag = "Plate";
     private List<Plate> plates = new List<Plate>();
     public StandMgr standMgr;
 
@@ -38,10 +37,14 @@ public class Repository : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void OnDeploy(SellItemData data)
+    public bool OnDeploy(SellItemData data)
     {
+        if (standMgr.stands[connectStandIdx].data != null)
+            return false;
+
         gameObject.SetActive(false);
         standMgr.SetStandItem(connectStandIdx, data);
+        return true;
     }
 
     public void SelectCancelAll()

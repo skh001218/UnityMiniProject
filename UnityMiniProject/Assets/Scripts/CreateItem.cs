@@ -36,7 +36,7 @@ public class CreateItem : MonoBehaviour
             {
                 if (itemBase.item.data == null)
                 {
-                    itemBase.item.SetData(createItem);
+                    itemBase.item.SetData(createItem.ID);
                     RandomData();
                     break;
                 }
@@ -83,12 +83,12 @@ public class CreateItem : MonoBehaviour
         Weapon combine1 = combineWp.Find(n => n == selectWp);
         Weapon combine2 = combineWp.Find(n => n != selectWp);
 
-        if (!(combine1.data.Level == combine2.data.Level && combine1.data.Kind == combine2.data.Kind)
+        if (!(combine1.data.Level == combine2.data.Level)
             || DataTableManager.WeaponTable.GetToLevelAndKind(combine2.data.Level + 1, combine2.data.Kind) == empty)
             return;
 
         combine1.SetDataEmpty();
-        combine2.SetData(DataTableManager.WeaponTable.GetToLevelAndKind(combine2.data.Level + 1, combine2.data.Kind));
+        combine2.SetData(DataTableManager.WeaponTable.GetToLevelAndKind(combine2.data.Level + 1, combine2.data.Kind).ID);
 
         combineWp.Clear();
     }
@@ -109,7 +109,7 @@ public class CreateItem : MonoBehaviour
             moveWp.Clear();
             return;
         }
-        moveWp[moveWp.Count - 1].SetData(selectWp.data);
+        moveWp[moveWp.Count - 1].SetData(selectWp.data.ID);
         selectWp.SetDataEmpty();
     }
 }

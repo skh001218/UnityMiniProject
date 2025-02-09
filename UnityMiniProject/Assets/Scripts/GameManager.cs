@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,8 +10,10 @@ public class GameManager : MonoBehaviour
     public List<GameObject> areaList;
     public Guest[] guestPrefeb;
     public GameObject[] arrows;
+    public GameObject topUi;
 
     public SellAreaMgr sellAreaMgr;
+    public SellItemMgr sellItemMgr;
     public StandMgr standMgr;
 
     private int curArea = 0;
@@ -27,9 +30,14 @@ public class GameManager : MonoBehaviour
     private float selectRandomTime = 15f;
     private float selectTime = 0f;
 
+    private int totalGold;
+    private int totalDiamond;
+    public TextMeshProUGUI goldText;
+    public TextMeshProUGUI DiaText;
+
     private void Start()
     {
-        Application.targetFrameRate = -1;
+        Application.targetFrameRate = 60;
 
         Camera camera = Camera.main;
         Rect rect = camera.rect;
@@ -49,7 +57,9 @@ public class GameManager : MonoBehaviour
         }
         camera.rect = rect;
 
-        
+        Vector2 safeAreaPos = new Vector2(topUi.transform.position.x,
+            Screen.safeArea.position.y + Screen.safeArea.height);
+        topUi.transform.position = safeAreaPos;
 
         //가로 고정 ( 화면에 따라 위 아래가 더 찍힘 )
         arrows = GameObject.FindGameObjectsWithTag("Arrow");
@@ -72,6 +82,7 @@ public class GameManager : MonoBehaviour
             go.transform.SetParent(areaList[1].transform);
             go.transform.localScale = Vector3.one;
             go.standMgr = standMgr;
+            go.sellItemMgr = sellItemMgr;
             guestTime = 0f;
             guests.Add(go);
         }
@@ -125,6 +136,7 @@ public class GameManager : MonoBehaviour
             guests[idx].isSelect = true;
 
         guests[idx].SetWayPoint();
+        selectTime = 0;
 
     }
 
@@ -133,6 +145,12 @@ public class GameManager : MonoBehaviour
         int cnt = guests.Where(n => n != guest && n.posNum == guest.posNum + 1).Count();
 
         return cnt > 0;
+    }
+
+    public void SetTotalGold(int price)
+    {
+        totalGold += price;
+        goldText.text = totalGold.ToString();
     }
 
     private void OnGUI()

@@ -45,7 +45,9 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
 
     private void OnClickDeploy()
     {
-        repository.OnDeploy(data);
+
+        if (!repository.OnDeploy(data))
+            return;
         data = null;
         GetComponent<Image>().sprite = null;
     }

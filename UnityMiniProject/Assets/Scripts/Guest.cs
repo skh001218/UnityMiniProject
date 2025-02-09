@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using static SellItemTable;
@@ -24,6 +25,7 @@ public class Guest : MonoBehaviour
     public bool isRight;
     public float speed = 25f;
     public StandMgr standMgr;
+    public SellItemMgr sellItemMgr;
 
     public GameObject wayPoint;
     public List<Transform> wayPoints = new List<Transform>();
@@ -38,7 +40,10 @@ public class Guest : MonoBehaviour
 
     private bool isCal;
 
-    private List<SellItemData> buyItems = new List<SellItemData>();
+    public List<SellItemData> buyItems = new List<SellItemData>();
+    public int itemCount = 0;
+
+
     private void Start()
     {
         /*for (int i = 0; i < wayPoint.transform.childCount; i++)
@@ -73,8 +78,20 @@ public class Guest : MonoBehaviour
         }
         else
         {
+            
             if (isCal)
+            {
+                if(itemCount <= 0)
+                {
+                    gm.SetTotalGold(sellItemMgr.sumPrice);
+                    isCal = false;
+                    sellItemMgr.IsSell = false;
+                    sellItemMgr.SetCurGuest(null);
+                    sellItemMgr.CreateGoldCount();
+                }
                 return;
+            }
+                
 
             if(transform.position.x > wayPoints[posNum].position.x)
             {
@@ -99,8 +116,17 @@ public class Guest : MonoBehaviour
             if (Vector3.Distance(transform.position, wayPoints[posNum].position) < 0.1f)
             {
                 
-                if (gm.CheckWayPoint(this) && posNum > wayPoints.Count - 6 && posNum > wayPoints.Count - 2)
+                if (posNum > wayPoints.Count - 6 && posNum < wayPoints.Count - 2 && gm.CheckWayPoint(this))
                     return;
+
+                if(posNum == wayPoints.Count - 2 && itemCount > 0 && !isCal)
+                {
+                    isCal = true;
+                    sellItemMgr.IsSell = true;
+                    sellItemMgr.SetCurGuest(this);
+                    sellItemMgr.sliderImage.sprite = buyItems[0].IconSprite;
+                    return;
+                }
 
                 if(prePosNum == posNum || speed == 0)
                 {
@@ -160,6 +186,7 @@ public class Guest : MonoBehaviour
                 // 해당 진열대에서 아이템 갯수 감소
                 stand.PickUpItem();
                 buyItems.Add(stand.data);
+                itemCount++;
                 break;
             case Status.MoveNotBuy:
                 // 처리 필요 x
@@ -171,6 +198,7 @@ public class Guest : MonoBehaviour
                 stand.PickUpItem();
                 // 보유 아이템 추가
                 buyItems.Add(stand.data);
+                itemCount++;
                 break;
             case Status.StopNotBuy:
                 // 해당 진열대 머물기
@@ -196,5 +224,9 @@ public class Guest : MonoBehaviour
     public void SetWayPoint()
     {
         wayPoints = standMgr.wayPoints;
+    }
+
+    public void CalculItem()
+    {
     }
 }
