@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class SellItemTable : DataTable
 {
@@ -27,15 +28,36 @@ public class SellItemTable : DataTable
         public int Price { get; set; }
 
         public int Sale {  get; set; }
-        public string ImageFileName { get; set; }
+        public string ImageFileName1 { get; set; }
+        public string ImageFileName2 { get; set; }
+        public string ImageFileName3 { get; set; }
+        public string ImageFileName4 { get; set; }
+        public string ImageFileName5 { get; set; }
 
-        public Sprite IconSprite
+        public Sprite IconSprite(int number)
         {
-            get
+            Sprite sprite = null;
+            switch (number)
             {
-                var sprite = Resources.Load<Sprite>($"{string.Format(imagePath, ImageFileName)}");
-                return sprite;
+                case 1:
+                    sprite = Resources.Load<Sprite>($"{string.Format(imagePath, ImageFileName1)}");
+                    break;
+                case 2:
+                    sprite = Resources.Load<Sprite>($"{string.Format(imagePath, ImageFileName2)}");
+                    break;
+                case 3:
+                    sprite = Resources.Load<Sprite>($"{string.Format(imagePath, ImageFileName3)}");
+                    break;
+                case 4:
+                    sprite = Resources.Load<Sprite>($"{string.Format(imagePath, ImageFileName4)}");
+                    break;
+                case 5:
+                    sprite = Resources.Load<Sprite>($"{string.Format(imagePath, ImageFileName5)}");
+                    break;
             }
+            
+            return sprite;
+            
         }
     }
 

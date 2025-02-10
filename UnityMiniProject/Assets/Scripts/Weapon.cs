@@ -80,6 +80,7 @@ public class Weapon : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         collideFur = null;
+        itemMgr.collideFur.Clear();
         itemMgr.combineWp.Remove(this);
     }
 

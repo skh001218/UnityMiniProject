@@ -124,7 +124,7 @@ public class Guest : MonoBehaviour
                     isCal = true;
                     sellItemMgr.IsSell = true;
                     sellItemMgr.SetCurGuest(this);
-                    sellItemMgr.sliderImage.sprite = buyItems[0].IconSprite;
+                    sellItemMgr.sliderImage.sprite = buyItems[0].IconSprite(1);
                     return;
                 }
 

@@ -61,6 +61,7 @@ public class Stand : MonoBehaviour
     public void PickUpItem()
     {
         itemCount--;
+        image.sprite = DataTableManager.SellItemTable.Get(data.ID).IconSprite(itemCount);
         if (itemCount == 0)
         {
             data = null;
@@ -72,7 +73,7 @@ public class Stand : MonoBehaviour
     {
         this.data = data;
         image.gameObject.SetActive(true);
-        image.sprite = this.data.IconSprite;
+        image.sprite = this.data.IconSprite(1);
         itemCount = 5;
     }
 
