@@ -6814,7 +6814,17 @@ MonoBehaviour:
     MaskIndex: 0
     image: {fileID: 0}
     Color: {r: 1, g: 1, b: 1, a: 1}
-  SpumAnimationData: []
+  SpumAnimationData:
+  - UnitType: 
+    StateType: 
+    Path: 
+    PackageName: 
+    SpeedParam: 0
+  - UnitType: 
+    StateType: 
+    Path: 
+    PackageName: 
+    SpeedParam: 0
   IDLE_List:
   - {fileID: 7400000, guid: f28f6b07698afa64788c223754b1f4ff, type: 2}
   MOVE_List:
