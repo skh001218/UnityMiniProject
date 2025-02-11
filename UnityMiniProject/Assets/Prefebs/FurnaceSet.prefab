@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4655531965266129772}
   - component: {fileID: 6743109928989946912}
   - component: {fileID: 6985884386328180023}
-  m_Layer: 0
+  - component: {fileID: 3217435529935759415}
+  m_Layer: 7
   m_Name: FurnaceSet
   m_TagString: Furnace
   m_Icon: {fileID: 0}
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71b71d49bbc6b7c4b94432dc373d7f50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  repository: {fileID: 0}
   bakeTimeCircle: {fileID: 0}
   countPrefeb: {fileID: 3538080170288607411, guid: a9030413b6fe04a4b9eb18525c4d34b1, type: 3}
 --- !u!50 &6743109928989946912
@@ -122,6 +124,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7956797, y: 0.8417908}
   m_EdgeRadius: 0
+--- !u!114 &3217435529935759415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5128890195317629469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea64c28c923b164783c7b22414c7af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExpendMgr: {fileID: 0}
 --- !u!1001 &530655463605371794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -185,6 +200,10 @@ PrefabInstance:
     - target: {fileID: 3178655402294071348, guid: 666866e92b4852b4f95fdcee60fa03cf, type: 3}
       propertyPath: m_Name
       value: Furnace_FireEmpty
+      objectReference: {fileID: 0}
+    - target: {fileID: 3178655402294071348, guid: 666866e92b4852b4f95fdcee60fa03cf, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3178655402294071348, guid: 666866e92b4852b4f95fdcee60fa03cf, type: 3}
       propertyPath: m_IsActive
@@ -265,8 +284,12 @@ PrefabInstance:
       value: Furnace_FireNotEmpty
       objectReference: {fileID: 0}
     - target: {fileID: 4254000543393318768, guid: 7efc2de1914d06f4c87014bcef4a6c1c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4254000543393318768, guid: 7efc2de1914d06f4c87014bcef4a6c1c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -10,6 +10,10 @@ TagManager:
   - WayPoint
   - Plate
   - Stand
+  - AddBase
+  - Base
+  - AddFurnace
+  - AddStand
   layers:
   - Default
   - TransparentFX
@@ -18,7 +22,7 @@ TagManager:
   - Water
   - UI
   - Stand
-  - 
+  - Furnace
   - 
   - 
   - 

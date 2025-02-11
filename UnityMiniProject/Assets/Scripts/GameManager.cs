@@ -153,6 +153,8 @@ public class GameManager : MonoBehaviour
         goldText.text = totalGold.ToString();
     }
 
+    
+
     private void OnGUI()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR

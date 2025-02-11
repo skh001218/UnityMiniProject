@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -5,6 +6,7 @@ using System.IO.Pipes;
 using System.Linq;
 using UnityEngine;
 using static WeaponTable;
+using static Defines;
 
 public class Weapon : MonoBehaviour
 {
@@ -43,23 +45,32 @@ public class Weapon : MonoBehaviour
 
     private void OnMouseUp()
     {
+        var wPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        var hit = Physics2D.Raycast(wPos, Vector2.zero, 1, LayerMask.GetMask("Furnace"));
+
         itemMgr.MoveItem();
         itemMgr.CombineItem();
         itemMgr.selectWp = null;
-        if(itemMgr.collideFur.Count > 0 && data != null)
-            collideFur = itemMgr.collideFur.Last();
-        if (collideFur != null && !collideFur.IsBake)
+
+        if (hit.collider != null)
         {
-            Debug.Log(data.ID);
-            collideFur.BakeItem(this);
-            data = null;
-            itemImage.sprite = null;
+            if (itemMgr.collideFur.Count > 0 && data != null)
+                collideFur = itemMgr.collideFur.Last();
+            if (collideFur != null && !collideFur.IsBake)
+            {
+                Debug.Log(data.ID);
+                collideFur.BakeItem(this);
+                data = null;
+                itemImage.sprite = null;
+            }
         }
-        
+
         transform.position = originPos;
         itemImage.sortingLayerName = beforeLayer;
         itemMgr.moveWp.Clear();
         itemMgr.collideFur.Clear();
+
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -80,7 +91,6 @@ public class Weapon : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         collideFur = null;
-        itemMgr.collideFur.Clear();
         itemMgr.combineWp.Remove(this);
     }
 

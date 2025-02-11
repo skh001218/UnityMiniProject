@@ -37,6 +37,7 @@ public class CreateItem : MonoBehaviour
                 if (itemBase.item.data == null)
                 {
                     itemBase.item.SetData(createItem.ID);
+                    itemBase.item.itemMgr = this;
                     RandomData();
                     break;
                 }
@@ -83,7 +84,7 @@ public class CreateItem : MonoBehaviour
         Weapon combine1 = combineWp.Find(n => n == selectWp);
         Weapon combine2 = combineWp.Find(n => n != selectWp);
 
-        if (!(combine1.data.Level == combine2.data.Level)
+        if (combine1.data.Level != combine2.data.Level
             || DataTableManager.WeaponTable.GetToLevelAndKind(combine2.data.Level + 1, combine2.data.Kind) == empty)
             return;
 
