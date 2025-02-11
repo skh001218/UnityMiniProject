@@ -82,6 +82,7 @@ public class Stand : MonoBehaviour
         GameObject go = new GameObject("wayPoint");
         go.transform.SetParent(parent);
         go.transform.position = gameObject.transform.position;
+        go.transform.tag = "wp";
         wayPoint = go.transform;
         wayPoint.position = new Vector2(wayPoint.position.x, wayPoint.position.y - magY);
     }

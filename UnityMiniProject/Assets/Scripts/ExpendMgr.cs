@@ -193,13 +193,8 @@ public class ExpendMgr : MonoBehaviour
         }
         addStand.transform.SetAsLastSibling();
 
-        GameObject go = new GameObject("wayPoint");
-        go.transform.SetParent(wayPointList.transform);
-        go.transform.position = new Vector2(addStand.transform.position.x, addStand.transform.position.y - mag);
-
-        addWayPoint.transform.SetAsLastSibling();
-
-        standMgr.addStandWayPoint = go.transform;
+        addWayPoint.transform.position = new Vector2(addStand.transform.position.x, addStand.transform.position.y - mag);
+        standMgr.SetWayPoint();
 
     }
 }

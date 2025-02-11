@@ -28,7 +28,7 @@ public class Guest : MonoBehaviour
     public SellItemMgr sellItemMgr;
 
     public GameObject wayPoint;
-    public List<Transform> wayPoints = new List<Transform>();
+    public List<Vector2> wayPoints = new List<Vector2>();
     public int posNum = 0;
     private int prePosNum = -1;
     public GameObject rightPos;
@@ -93,7 +93,7 @@ public class Guest : MonoBehaviour
             }
                 
 
-            if(transform.position.x > wayPoints[posNum].position.x)
+            if(transform.position.x > wayPoints[posNum].x)
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
@@ -102,18 +102,18 @@ public class Guest : MonoBehaviour
                 transform.localScale = new Vector3(-1, 1, 1);
             }
 
-            if (transform.position.x != wayPoints[0].position.x && posNum == 0)
+            if (transform.position.x != wayPoints[0].x && posNum == 0)
             {
                 transform.position = Vector2.MoveTowards(transform.position,
-                    new Vector2(wayPoints[posNum].position.x, transform.position.y), speed * Time.deltaTime);
+                    new Vector2(wayPoints[posNum].x, transform.position.y), speed * Time.deltaTime);
                 return;
             }
 
 
             
-            transform.position = Vector2.MoveTowards(transform.position, wayPoints[posNum].position, speed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position, wayPoints[posNum], speed * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, wayPoints[posNum].position) < 0.1f)
+            if (Vector3.Distance(transform.position, wayPoints[posNum]) < 0.1f)
             {
                 
                 if (posNum > wayPoints.Count - 6 && posNum < wayPoints.Count - 2 && gm.CheckWayPoint(this))
@@ -133,8 +133,8 @@ public class Guest : MonoBehaviour
                     return;
                 }
 
-                if (standMgr.stands.Where(n => n.wayPoint == wayPoints[posNum]).Count() > 0)
-                    status = CheckStand(standMgr.stands.Where(n => n.wayPoint == wayPoints[posNum]).First());
+                if (standMgr.stands.Where(n => (Vector2)n.wayPoint.position == wayPoints[posNum]).Count() > 0)
+                    status = CheckStand(standMgr.stands.Where(n => (Vector2)n.wayPoint.position == wayPoints[posNum]).First());
                 else
                     status = Status.MoveNotBuy;
 
@@ -223,7 +223,11 @@ public class Guest : MonoBehaviour
 
     public void SetWayPoint()
     {
-        wayPoints = standMgr.wayPoints;
+        wayPoints.Clear();
+        for (int i = 0; i < standMgr.wayPoints.Count; i++)
+        {
+            wayPoints.Add(standMgr.wayPoints[i].position);
+        }
     }
 
     public void CalculItem()
