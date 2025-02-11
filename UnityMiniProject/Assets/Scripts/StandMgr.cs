@@ -11,6 +11,7 @@ public class StandMgr : MonoBehaviour
     public List<Transform> StartWayPoints = new List<Transform>();
     public List<Transform> LastWayPoints = new List<Transform>();
     public GameObject wayPointList;
+    public Transform addStandWayPoint;
 
     private void Start()
     {
@@ -42,7 +43,7 @@ public class StandMgr : MonoBehaviour
                 Transform temp = tempGo.transform;
                 temp.SetParent(wayPointList.transform);
                 temp.position = stands[i].wayPoint.position;
-                mag = Mathf.Abs(stands[i].wayPoint.position.x - stands[i - 1].wayPoint.position.x);
+                mag = 50f;//Mathf.Abs(stands[i].wayPoint.position.x - stands[i - 1].wayPoint.position.x);
                 if ((i / 5) % 2 != 0)
                 {
                     temp.position = new Vector2(temp.position.x + mag, temp.position.y);
@@ -50,7 +51,11 @@ public class StandMgr : MonoBehaviour
                 }
                 else
                 {
-                    temp.position = new Vector2(temp.position.x - mag, temp.position.y);
+                    if(i + 1 == stands.Count && addStandWayPoint != null)
+                    {
+                        wayPoints.Add(addStandWayPoint);
+                    }
+                    temp.position = new Vector2(temp.position.x - mag * 2, temp.position.y);
                     wayPoints.Add(temp);
 
                     if (i + 1 == stands.Count)
@@ -86,5 +91,10 @@ public class StandMgr : MonoBehaviour
     public void SetStandItem(int standIdx, SellItemData data)
     {
         stands[standIdx].SetItemData(data);
+    }
+
+    public void SortWayPoint()
+    {
+        
     }
 }

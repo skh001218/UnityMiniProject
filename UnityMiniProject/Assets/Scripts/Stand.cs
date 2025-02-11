@@ -25,7 +25,7 @@ public class Stand : MonoBehaviour
     }
     private void Update()
     {
-        tempCountText.text = itemCount.ToString();
+        //tempCountText.text = itemCount.ToString();
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {

@@ -39,6 +39,7 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
         }
         else
         {
+            Debug.Log(data.ImageFileName1);
             GetComponent<Image>().sprite = data.IconSprite(1);
         }
     }

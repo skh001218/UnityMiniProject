@@ -75,7 +75,7 @@ public class WeaponTable : DataTable
     {
         foreach (var item in items)
         {
-            if (item.Value.Level == level && item.Value.Kind == kind)
+            if (item.Value.Level == level)
                 return item.Value;
         }
         return empty;

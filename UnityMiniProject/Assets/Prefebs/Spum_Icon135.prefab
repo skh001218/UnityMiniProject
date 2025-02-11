@@ -106,6 +106,7 @@ MonoBehaviour:
   magY: 50
   image: {fileID: 7726903981187502962}
   itemCount: 0
+  tempCountText: {fileID: 0}
 --- !u!61 &704992219142663745
 BoxCollider2D:
   m_ObjectHideFlags: 0

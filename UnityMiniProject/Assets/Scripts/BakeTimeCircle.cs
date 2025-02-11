@@ -10,11 +10,11 @@ public class BakeTimeCircle : MonoBehaviour
     public Image timeCircle;
     public Image itemImage;
 
-    private Color defColor;
+    public Color defColor;
 
     private void Start()
     {
-        defColor = timeCircle.color;
+        defColor = new Color(0.7f, 1f, 0.7f);
         Reset();
     }
 
