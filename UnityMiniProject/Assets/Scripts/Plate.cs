@@ -11,6 +11,7 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
     private SellItemData data;
     public bool isSelect;
     public Button deploy;
+    public Image itemImage;
 
     public Repository repository;
 
@@ -39,8 +40,8 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
         }
         else
         {
-            Debug.Log(data.ImageFileName1);
-            GetComponent<Image>().sprite = data.IconSprite(1);
+            itemImage.sprite = data.IconSprite(5);
+            itemImage.gameObject.SetActive(true);
         }
     }
 
@@ -50,7 +51,8 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
         if (!repository.OnDeploy(data))
             return;
         data = null;
-        GetComponent<Image>().sprite = null;
+        itemImage.sprite = null;
+        itemImage.gameObject.SetActive(false);
     }
     public SellItemData GetItem() => data;
 
@@ -71,5 +73,10 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
 
         repository.SelectCancelAll();
         isSelect = true;
+    }
+
+    public void addPlate()
+    {
+
     }
 }

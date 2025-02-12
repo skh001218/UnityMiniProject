@@ -27,15 +27,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247200938341612968}
   m_LocalRotation: {x: -0.44258115, y: -0, z: -0, w: 0.8967285}
-  m_LocalPosition: {x: 0, y: 0, z: 64.12773}
-  m_LocalScale: {x: 0.33333334, y: 0.5747387, z: 0.44246238}
+  m_LocalPosition: {x: 0, y: 0, z: 81}
+  m_LocalScale: {x: 0.33333334, y: 0.57473874, z: 0.44246238}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4324646838953210126}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.66665244, y: 68.448975}
+  m_AnchoredPosition: {x: 0.6666219, y: 65}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2661271926341229183
@@ -119,7 +119,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1228663941386559438}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7118444426133736347}
+        m_TargetAssemblyTypeName: AddItem, Assembly-CSharp
+        m_MethodName: AddPlate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2621544895987773788
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +156,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2621544895987773788}
   m_LocalRotation: {x: -0.44258115, y: -0, z: -0, w: 0.8967285}
-  m_LocalPosition: {x: 0, y: 0, z: 77.62149}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.33333334, y: 0.5747387, z: 0.44246238}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -154,7 +166,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8, y: 65.0022}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3392453710993940994
@@ -183,7 +195,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3392453710993940994}
   m_LocalRotation: {x: 0, y: 0, z: -0.38268343, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -191,7 +203,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -61, y: -88}
+  m_AnchoredPosition: {x: -2, y: 13}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6498050630264152107
@@ -258,7 +270,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7758667543039769075}
   m_LocalRotation: {x: -0.000000029802315, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.000068972135}
+  m_LocalPosition: {x: 0, y: 0, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -266,8 +278,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 57.999985, y: -89.00012}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -3, y: -58}
+  m_SizeDelta: {x: 261.919, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3763465207521675199
 CanvasRenderer:
@@ -297,7 +309,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10
+  m_text: 10000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 233ea1267a7eba1448d055347410fbd6, type: 2}
   m_sharedMaterial: {fileID: 8771853028424182143, guid: 233ea1267a7eba1448d055347410fbd6, type: 2}
@@ -324,8 +336,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -360,7 +372,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 2.1350539, y: 0, z: 6.405121, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -377,6 +389,7 @@ GameObject:
   - component: {fileID: 4324646838953210126}
   - component: {fileID: 2558004760379594233}
   - component: {fileID: 5327181374551142670}
+  - component: {fileID: 7118444426133736347}
   m_Layer: 5
   m_Name: AddPlate
   m_TagString: Untagged
@@ -396,8 +409,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1995337812799632786}
   - {fileID: 2704766647743595375}
+  - {fileID: 1995337812799632786}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -433,8 +446,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 052129671933a9441afbfb88fa49990d, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 29ede38bfae87834686aff4fa8dddece, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -443,3 +456,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7118444426133736347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978242664747926845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea64c28c923b164783c7b22414c7af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ExpendMgr: {fileID: 0}
+  timeCirclePrefeb: {fileID: 3851664345798419854, guid: ba95d1b324683e14cac5acf655437021, type: 3}
+  timeCircle: {fileID: 0}
+  needText: {fileID: 5362146875056427630}
+  endTime: 10
+  needGold: 100
+  curTime: 0

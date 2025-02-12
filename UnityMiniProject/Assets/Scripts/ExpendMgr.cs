@@ -37,12 +37,29 @@ public class ExpendMgr : MonoBehaviour
     private Vector2 nextStandPos;
     private float mag = 45f;
     GameObject addWayPoint;
+    public int maxStandCount = 10;
+
+    public Plate platePrefebs;
+    public AddItem plateAddPrefebs;
+    private AddItem addPlate;
+    public GameObject plateParent;
+    private int plateCount;
+    public int maxPlateCount = 12;
 
     private void Start()
     {
+        baseMaxRowCount = 5;
+        baseMaxColCount = 5;
+        furnaceMaxRowCount = 2;
+        furnaceMaxColCount = 5;
+        furnaceCount = 1;
+        maxStandCount = 10;
+        maxPlateCount = 12;
+
         SetBase();
         SetFurnace();
         SetStand();
+        SetPlate();
     }
     private void SetBase()
     {
@@ -79,7 +96,8 @@ public class ExpendMgr : MonoBehaviour
         }
 
         addBase.transform.position = nextBasePos;
-        
+        addBase.SetNeedGold(addBase.increseGold);
+
     }
 
     private void SetFurnace()
@@ -132,7 +150,7 @@ public class ExpendMgr : MonoBehaviour
         }
 
         addFurnace.transform.position = nextFurnacePos;
-
+        addFurnace.SetNeedGold(addFurnace.increseGold);
     }
 
     private void SetStand()
@@ -160,11 +178,11 @@ public class ExpendMgr : MonoBehaviour
         stand.standMgr = standMgr;
         stand.transform.SetParent(standMgr.transform);
         stand.transform.localScale = Vector3.one;
-        /*if (createItem.itemBases.Count >= baseMaxColCount * baseMaxRowCount)
+        if (createItem.itemBases.Count >= maxStandCount)
         {
             Destroy(addBase.gameObject);
             return;
-        }*/
+        }
         if (standMgr.stands.Count % 5 == 0)
         {
             if ((standMgr.stands.Count / 5) % 2 != 0)
@@ -192,9 +210,39 @@ public class ExpendMgr : MonoBehaviour
             }
         }
         addStand.transform.SetAsLastSibling();
+        addStand.SetNeedGold(addStand.increseGold);
 
         addWayPoint.transform.position = new Vector2(addStand.transform.position.x, addStand.transform.position.y - mag);
         standMgr.SetWayPoint();
 
+    }
+
+    public void SetPlate()
+    {
+        Plate plate = Instantiate(platePrefebs, plateParent.transform);
+        plate.transform.localScale = Vector3.one;
+        plateCount = 1;
+
+        sellAreaMgr.repository.SetPlateList(plate);
+
+        addPlate = Instantiate(plateAddPrefebs, plateParent.transform);
+        addPlate.transform.localScale = Vector3.one;
+        addPlate.ExpendMgr = this;
+
+
+    }
+
+    public void AddPlate()
+    {
+        Plate plate = Instantiate(platePrefebs, plateParent.transform);
+        plate.transform.localScale = Vector3.one;
+        plateCount++;
+
+        sellAreaMgr.repository.SetPlateList(plate);
+
+        addPlate.transform.SetAsLastSibling();
+
+        if(plateCount >= maxPlateCount)
+            Destroy(addPlate.gameObject);
     }
 }

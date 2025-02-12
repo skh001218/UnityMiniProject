@@ -61,4 +61,9 @@ public class Repository : MonoBehaviour
         connectStandIdx = connetIdx;
         gameObject.SetActive(true);
     }
+
+    public void SetPlateList(Plate plate)
+    {
+        plates.Add(plate);
+    }
 }

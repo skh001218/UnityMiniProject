@@ -50,13 +50,13 @@ public class Furnace : MonoBehaviour
         CollideItem = false;
     }
 
-    public void BakeItem(Weapon weapon)
+    public void BakeItem(WeaponData weapon)
     {
         if (!CollideItem)
             return;
 
         IsBake = true;
-        item = DataTableManager.WeaponTable.Get(weapon.data.ID);
+        item = DataTableManager.WeaponTable.Get(weapon.ID);
         bakeTime = item.BakingTime;
         bakeTimeCircle.timeCircle.gameObject.SetActive(true);
         bakeTimeCircle.itemImage.sprite = item.IconSprite;

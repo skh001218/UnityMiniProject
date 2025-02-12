@@ -29,7 +29,6 @@ public class SellItemMgr : MonoBehaviour
             if (curSellTime > sellTime && curGuest.itemCount > 0)
             {
                 curSellTime = 0;
-                sliderImage.sprite = curGuest.buyItems[curGuest.buyItems.Count - curGuest.itemCount].IconSprite(1);
                 sumPrice += curGuest.buyItems[curGuest.buyItems.Count - curGuest.itemCount].Price;
                 sumGoldText.text = sumPrice.ToString();
                 curGuest.itemCount--;

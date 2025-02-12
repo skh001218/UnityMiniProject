@@ -124,7 +124,8 @@ public class Guest : MonoBehaviour
                     isCal = true;
                     sellItemMgr.IsSell = true;
                     sellItemMgr.SetCurGuest(this);
-                    sellItemMgr.sliderImage.sprite = buyItems[0].IconSprite(1);
+                    sellItemMgr.sliderImage.sprite = DataTableManager.WeaponTable
+                        .Get(buyItems[buyItems.Count - itemCount].DoughID).IconSprite;
                     return;
                 }
 
@@ -184,9 +185,9 @@ public class Guest : MonoBehaviour
         {
             case Status.MoveBuy:
                 // 해당 진열대에서 아이템 갯수 감소
-                stand.PickUpItem();
-                buyItems.Add(stand.data);
+                buyItems.Add(DataTableManager.SellItemTable.Get(stand.data.ID));
                 itemCount++;
+                stand.PickUpItem();
                 break;
             case Status.MoveNotBuy:
                 // 처리 필요 x
@@ -195,10 +196,10 @@ public class Guest : MonoBehaviour
                 // 해당 진열대에 머물기
                 StartCoroutine(StopGuest());
                 // 해당 진열대 아이템 갯수 감소
-                stand.PickUpItem();
                 // 보유 아이템 추가
-                buyItems.Add(stand.data);
+                buyItems.Add(DataTableManager.SellItemTable.Get(stand.data.ID));
                 itemCount++;
+                stand.PickUpItem();
                 break;
             case Status.StopNotBuy:
                 // 해당 진열대 머물기

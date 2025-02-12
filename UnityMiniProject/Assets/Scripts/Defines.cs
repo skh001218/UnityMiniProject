@@ -7,8 +7,8 @@ public static class Defines
 {
     public static class DataTableIds
     {
-        public static readonly string weapon = "ItemTable";
-        public static readonly string sellItem = "SellItemTable";
+        public static readonly string weapon = "DoughTable";
+        public static readonly string sellItem = "ItemTable";
     }
 
     public static bool RayCastGoWithTag(string tag)

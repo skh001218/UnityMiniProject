@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
     private float selectRandomTime = 15f;
     private float selectTime = 0f;
 
-    private int totalGold;
-    private int totalDiamond;
+    public int totalGold;
+    public int totalDiamond;
     public TextMeshProUGUI goldText;
     public TextMeshProUGUI DiaText;
 
@@ -153,7 +153,11 @@ public class GameManager : MonoBehaviour
         goldText.text = totalGold.ToString();
     }
 
-    
+    public void MinusTotalGold(int price)
+    {
+        totalGold -= price;
+        goldText.text = totalGold.ToString();
+    }
 
     private void OnGUI()
     {

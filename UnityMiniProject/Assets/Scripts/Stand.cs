@@ -25,6 +25,8 @@ public class Stand : MonoBehaviour
     }
     private void Update()
     {
+        if (repository.gameObject.activeSelf)
+            return;
         //tempCountText.text = itemCount.ToString();
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
@@ -73,7 +75,7 @@ public class Stand : MonoBehaviour
     {
         this.data = data;
         image.gameObject.SetActive(true);
-        image.sprite = this.data.IconSprite(1);
+        image.sprite = this.data.IconSprite(5);
         itemCount = 5;
     }
 

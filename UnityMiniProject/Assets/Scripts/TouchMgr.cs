@@ -33,9 +33,6 @@ public class TouchMgr : MonoBehaviour
     private float moveThreshold = 50f;
     private bool isWaitingForDoubleTap;
     private bool isTouching;
-
-    private int firstFingerId = -1;
-    private int secondFingerId = -1;
     private Vector2 firstFingerStartPos;
     private Vector2 secondFingerStartPos;
 

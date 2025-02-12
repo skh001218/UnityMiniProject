@@ -58,8 +58,7 @@ public class Weapon : MonoBehaviour
                 collideFur = itemMgr.collideFur.Last();
             if (collideFur != null && !collideFur.IsBake)
             {
-                Debug.Log(data.ID);
-                collideFur.BakeItem(this);
+                collideFur.BakeItem(data);
                 data = null;
                 itemImage.sprite = null;
             }

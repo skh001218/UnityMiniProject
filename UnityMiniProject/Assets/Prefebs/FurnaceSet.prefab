@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4655531965266129772}
   - component: {fileID: 6743109928989946912}
   - component: {fileID: 6985884386328180023}
-  - component: {fileID: 3217435529935759415}
   m_Layer: 7
   m_Name: FurnaceSet
   m_TagString: Furnace
@@ -124,19 +123,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7956797, y: 0.8417908}
   m_EdgeRadius: 0
---- !u!114 &3217435529935759415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5128890195317629469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ea64c28c923b164783c7b22414c7af2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ExpendMgr: {fileID: 0}
 --- !u!1001 &530655463605371794
 PrefabInstance:
   m_ObjectHideFlags: 0

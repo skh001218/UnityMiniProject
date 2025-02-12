@@ -5,7 +5,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Device;
 using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 public class SellAreaMgr : MonoBehaviour
 {
