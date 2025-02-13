@@ -27,7 +27,7 @@ public class Stand : MonoBehaviour
     {
         
         //tempCountText.text = itemCount.ToString();
-#if UNITY_EDITOR
+#if !UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
               
@@ -45,7 +45,7 @@ public class Stand : MonoBehaviour
 
 #elif UNITY_ANDROID
         
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             if (gameManager.sellAreaMgr.isDrag || repository.gameObject.activeSelf 
                 || gameManager.debugUi.gameObject.activeSelf || gameManager.tutorialUi.gameObject.activeSelf)
