@@ -15,6 +15,7 @@ TagManager:
   - AddFurnace
   - AddStand
   - wp
+  - AddPlate
   layers:
   - Default
   - TransparentFX

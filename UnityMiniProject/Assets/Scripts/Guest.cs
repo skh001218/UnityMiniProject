@@ -29,6 +29,7 @@ public class Guest : MonoBehaviour
 
     public GameObject wayPoint;
     public List<Vector2> wayPoints = new List<Vector2>();
+    public List<Vector2> standPoints = new List<Vector2>();
     public int posNum = 0;
     private int prePosNum = -1;
     public GameObject rightPos;
@@ -88,6 +89,13 @@ public class Guest : MonoBehaviour
                     sellItemMgr.IsSell = false;
                     sellItemMgr.SetCurGuest(null);
                     sellItemMgr.CreateGoldCount();
+
+                    int randomDia = Random.Range(0, 100);
+                    int diaCount = Random.Range(1, 6);
+                    if(randomDia <= 30)
+                    {
+                        gm.SetTotalDia(diaCount);
+                    }
                 }
                 return;
             }
@@ -134,7 +142,7 @@ public class Guest : MonoBehaviour
                     return;
                 }
 
-                if (standMgr.stands.Where(n => (Vector2)n.wayPoint.position == wayPoints[posNum]).Count() > 0)
+                if (standPoints.Where(n => n == wayPoints[posNum]).Count() > 0)
                     status = CheckStand(standMgr.stands.Where(n => (Vector2)n.wayPoint.position == wayPoints[posNum]).First());
                 else
                     status = Status.MoveNotBuy;
@@ -228,6 +236,11 @@ public class Guest : MonoBehaviour
         for (int i = 0; i < standMgr.wayPoints.Count; i++)
         {
             wayPoints.Add(standMgr.wayPoints[i].position);
+        }
+        for (int i = 0; i < standMgr.stands.Count; i++)
+        {
+            Debug.Log(standMgr.stands.Count);
+            standPoints.Add(standMgr.stands[i].wayPoint.position);
         }
     }
 

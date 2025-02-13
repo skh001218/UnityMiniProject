@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
     public SellAreaMgr sellAreaMgr;
     public SellItemMgr sellItemMgr;
     public StandMgr standMgr;
+    public TutorialUi tutorialUi;
+    public DebugUi debugUi;
 
     private int curArea = 0;
 
@@ -131,9 +134,16 @@ public class GameManager : MonoBehaviour
     {
         if (guests.Count < 1)
             return;
+
         int idx = Random.Range(0, guests.Count);
+
         if(!guests[idx].isSelect)
             guests[idx].isSelect = true;
+        else
+        {
+            selectTime = 0;
+            return;
+        }
 
         guests[idx].SetWayPoint();
         selectTime = 0;
@@ -158,6 +168,22 @@ public class GameManager : MonoBehaviour
         totalGold -= price;
         goldText.text = totalGold.ToString();
     }
+
+    public void SetTotalDia(int price)
+    {
+        totalDiamond += price;
+        DiaText.text = totalDiamond.ToString();
+    }
+
+    public void MinusTotalDia(int price)
+    {
+        totalDiamond -= price;
+        Debug.Log(price);
+        Debug.Log(totalDiamond);
+        DiaText.text = totalDiamond.ToString();
+    }
+
+    
 
     private void OnGUI()
     {

@@ -8,7 +8,7 @@ using static SellItemTable;
 
 public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
-    private SellItemData data;
+    public SellItemData data;
     public bool isSelect;
     public Button deploy;
     public Image itemImage;
@@ -53,6 +53,8 @@ public class Plate : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerU
         data = null;
         itemImage.sprite = null;
         itemImage.gameObject.SetActive(false);
+        //repository.SetPlateOrder();
+
     }
     public SellItemData GetItem() => data;
 

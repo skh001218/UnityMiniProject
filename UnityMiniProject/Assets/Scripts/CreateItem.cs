@@ -21,6 +21,7 @@ public class CreateItem : MonoBehaviour
     public List<Furnace> collideFur = new List<Furnace>();
 
     public List<ItemBase> itemBases;
+    public Animator anim;
 
     private void Start()
     {
@@ -65,11 +66,12 @@ public class CreateItem : MonoBehaviour
         List<ItemBase> temp = itemBases.Where(n => n.item.data == null).ToList();
         if (temp.Count <= 0)
         {
-            
+            anim.SetBool("5_Debuff", false);
             slider.gameObject.SetActive(false);
         }
         else
         {
+            anim.SetBool("5_Debuff", true);
             createTime += Time.deltaTime;
             slider.gameObject.SetActive(true);
         }
@@ -84,9 +86,18 @@ public class CreateItem : MonoBehaviour
         Weapon combine1 = combineWp.Find(n => n == selectWp);
         Weapon combine2 = combineWp.Find(n => n != selectWp);
 
+        if (combine1 == null || combine2 == null)
+            return;
+
         if (combine1.data.Level != combine2.data.Level
             || DataTableManager.WeaponTable.GetToLevelAndKind(combine2.data.Level + 1, combine2.data.Kind) == empty)
+        {
+            string dataStr = combine1.data.ID;
+            combine1.SetData(combine2.data.ID);
+            combine2.SetData(dataStr);
             return;
+        }
+            
 
         combine1.SetDataEmpty();
         combine2.SetData(DataTableManager.WeaponTable.GetToLevelAndKind(combine2.data.Level + 1, combine2.data.Kind).ID);
@@ -113,4 +124,11 @@ public class CreateItem : MonoBehaviour
         moveWp[moveWp.Count - 1].SetData(selectWp.data.ID);
         selectWp.SetDataEmpty();
     }
+
+    public void Swap()
+    {
+        
+        
+    }
+
 }

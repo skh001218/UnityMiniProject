@@ -56,11 +56,13 @@ public class Weapon : MonoBehaviour
         {
             if (itemMgr.collideFur.Count > 0 && data != null)
                 collideFur = itemMgr.collideFur.Last();
-            if (collideFur != null && !collideFur.IsBake)
+            if (collideFur != null && !collideFur.IsBake && collideFur.item == null)
             {
-                collideFur.BakeItem(data);
-                data = null;
-                itemImage.sprite = null;
+                if(collideFur.BakeItem(data))
+                {
+                    data = null;
+                    itemImage.sprite = null;
+                }
             }
         }
 

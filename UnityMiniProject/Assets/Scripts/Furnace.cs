@@ -50,10 +50,10 @@ public class Furnace : MonoBehaviour
         CollideItem = false;
     }
 
-    public void BakeItem(WeaponData weapon)
+    public bool BakeItem(WeaponData weapon)
     {
         if (!CollideItem)
-            return;
+            return false;
 
         IsBake = true;
         item = DataTableManager.WeaponTable.Get(weapon.ID);
@@ -63,6 +63,7 @@ public class Furnace : MonoBehaviour
         bakeTimeCircle.successText.gameObject.SetActive(false);
         transform.GetChild(0).gameObject.SetActive(false);
         transform.GetChild(1).gameObject.SetActive(true);
+        return true;
     }
 
     private void OnMouseUp()

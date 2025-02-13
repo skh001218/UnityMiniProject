@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class ExpendMgr : MonoBehaviour
@@ -46,15 +47,18 @@ public class ExpendMgr : MonoBehaviour
     private int plateCount;
     public int maxPlateCount = 12;
 
+    public bool noTime;
+
     private void Start()
     {
         baseMaxRowCount = 5;
-        baseMaxColCount = 5;
+        baseMaxColCount = 4;
         furnaceMaxRowCount = 2;
         furnaceMaxColCount = 5;
         furnaceCount = 1;
         maxStandCount = 10;
         maxPlateCount = 12;
+        noTime = false;
 
         SetBase();
         SetFurnace();
@@ -97,6 +101,7 @@ public class ExpendMgr : MonoBehaviour
 
         addBase.transform.position = nextBasePos;
         addBase.SetNeedGold(addBase.increseGold);
+        addBase.SetNeedTime(addBase.increseTime);
 
     }
 
@@ -151,6 +156,7 @@ public class ExpendMgr : MonoBehaviour
 
         addFurnace.transform.position = nextFurnacePos;
         addFurnace.SetNeedGold(addFurnace.increseGold);
+        addFurnace.SetNeedTime(addFurnace.increseTime);
     }
 
     private void SetStand()
@@ -178,9 +184,10 @@ public class ExpendMgr : MonoBehaviour
         stand.standMgr = standMgr;
         stand.transform.SetParent(standMgr.transform);
         stand.transform.localScale = Vector3.one;
-        if (createItem.itemBases.Count >= maxStandCount)
+        if (standMgr.stands.Count >= maxStandCount)
         {
-            Destroy(addBase.gameObject);
+            Destroy(addStand.gameObject);
+            standMgr.SetWayPoint();
             return;
         }
         if (standMgr.stands.Count % 5 == 0)
@@ -211,6 +218,7 @@ public class ExpendMgr : MonoBehaviour
         }
         addStand.transform.SetAsLastSibling();
         addStand.SetNeedGold(addStand.increseGold);
+        addStand.SetNeedTime(addStand.increseTime);
 
         addWayPoint.transform.position = new Vector2(addStand.transform.position.x, addStand.transform.position.y - mag);
         standMgr.SetWayPoint();
@@ -221,12 +229,14 @@ public class ExpendMgr : MonoBehaviour
     {
         Plate plate = Instantiate(platePrefebs, plateParent.transform);
         plate.transform.localScale = Vector3.one;
+        plate.itemImage.gameObject.SetActive(false);
         plateCount = 1;
 
         sellAreaMgr.repository.SetPlateList(plate);
 
         addPlate = Instantiate(plateAddPrefebs, plateParent.transform);
         addPlate.transform.localScale = Vector3.one;
+        addPlate.needText.text = addPlate.needDia.ToString();
         addPlate.ExpendMgr = this;
 
 
@@ -236,6 +246,7 @@ public class ExpendMgr : MonoBehaviour
     {
         Plate plate = Instantiate(platePrefebs, plateParent.transform);
         plate.transform.localScale = Vector3.one;
+        plate.itemImage.gameObject.SetActive(false);
         plateCount++;
 
         sellAreaMgr.repository.SetPlateList(plate);
@@ -244,5 +255,7 @@ public class ExpendMgr : MonoBehaviour
 
         if(plateCount >= maxPlateCount)
             Destroy(addPlate.gameObject);
+
+        addPlate.SetNeedDia(addPlate.increseDia);
     }
 }

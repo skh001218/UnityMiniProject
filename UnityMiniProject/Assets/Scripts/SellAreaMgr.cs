@@ -17,6 +17,7 @@ public class SellAreaMgr : MonoBehaviour
     public Transform limitDown;
 
     public Repository repository;
+    public GameManager gameManager;
 
     private void Start()
     {
@@ -40,7 +41,8 @@ public class SellAreaMgr : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (repository.gameObject.activeSelf)
+        if (repository.gameObject.activeSelf || gameManager.debugUi.gameObject.activeSelf 
+            || gameManager.tutorialUi.gameObject.activeSelf)
             return;
 
         isDrag = true;
@@ -53,7 +55,7 @@ public class SellAreaMgr : MonoBehaviour
             return;
 
         Camera.main.transform.position = new Vector3(Camera.main.transform.position.x,
-            Camera.main.transform.position.y + moveDir.y * 5f, -10f);
+            Camera.main.transform.position.y + moveDir.y * 10f, -10f);
 
         
     }

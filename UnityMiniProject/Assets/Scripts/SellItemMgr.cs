@@ -19,11 +19,14 @@ public class SellItemMgr : MonoBehaviour
     private Guest curGuest;
     public int sumPrice = 0;
     public BakeCount countPrefeb;
+
+    public Animator anim;
     private void Update()
     {
         
         if (IsSell)
         {
+            anim.SetBool("5_Debuff", true);
             slider.gameObject.SetActive(true);
             curSellTime += Time.deltaTime;
             if (curSellTime > sellTime && curGuest.itemCount > 0)
@@ -46,6 +49,7 @@ public class SellItemMgr : MonoBehaviour
         }
         else
         {
+            anim.SetBool("5_Debuff", false);
             slider.gameObject.SetActive(false);
             curSellTime = 0;
             sumPrice = 0;

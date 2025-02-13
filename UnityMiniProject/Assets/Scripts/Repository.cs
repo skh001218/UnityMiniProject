@@ -66,4 +66,28 @@ public class Repository : MonoBehaviour
     {
         plates.Add(plate);
     }
+
+    public void SetPlateOrder()
+    {
+        for (int i = 0; i < plates.Count; i++)
+        {
+            if (plates[i].data != null)
+                continue;
+
+            if (i + 1 == plates.Count)
+            {
+                return;
+            }
+
+            var temp = plates[i].data;
+            plates[i].data = plates[i + 1].data;
+            plates[i + 1].data = temp;
+
+            plates[i].itemImage.sprite = plates[i].data.IconSprite(5);
+            plates[i].itemImage.gameObject.SetActive(true);
+
+            plates[i + 1].itemImage.sprite = null;
+            plates[i + 1].itemImage.gameObject.SetActive(false);
+        }
+    }
 }

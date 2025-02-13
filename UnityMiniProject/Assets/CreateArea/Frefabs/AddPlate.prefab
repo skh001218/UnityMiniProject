@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 7118444426133736347}
   m_Layer: 5
   m_Name: AddPlate
-  m_TagString: Untagged
+  m_TagString: AddPlate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -472,6 +472,13 @@ MonoBehaviour:
   timeCirclePrefeb: {fileID: 3851664345798419854, guid: ba95d1b324683e14cac5acf655437021, type: 3}
   timeCircle: {fileID: 0}
   needText: {fileID: 5362146875056427630}
-  endTime: 10
   needGold: 100
+  increseGold: 50
+  maxIncreseGold: 1000
+  needDia: 10
+  increseDia: 50
+  maxIncreseDia: 1000
+  endTime: 10
+  increseTime: 30
+  maxIncreseTime: 300
   curTime: 0

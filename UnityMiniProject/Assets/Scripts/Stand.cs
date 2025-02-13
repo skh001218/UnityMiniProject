@@ -25,13 +25,14 @@ public class Stand : MonoBehaviour
     }
     private void Update()
     {
-        if (repository.gameObject.activeSelf)
-            return;
+        
         //tempCountText.text = itemCount.ToString();
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0))
         {
-            if (gameManager.sellAreaMgr.isDrag || repository.gameObject.activeSelf)
+              
+            if (gameManager.sellAreaMgr.isDrag || repository.gameObject.activeSelf 
+                || gameManager.debugUi.gameObject.activeSelf || gameManager.tutorialUi.gameObject.activeSelf)
                 return;
             var wPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             var hit = Physics2D.Raycast(wPos, Vector2.zero, 1, LayerMask.GetMask("Stand"));
@@ -43,11 +44,13 @@ public class Stand : MonoBehaviour
         }
 
 #elif UNITY_ANDROID
+        
         if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-            if (gameManager.sellAreaMgr.isDrag || repository.gameObject.activeSelf)
+            if (gameManager.sellAreaMgr.isDrag || repository.gameObject.activeSelf 
+                || gameManager.debugUi.gameObject.activeSelf || gameManager.tutorialUi.gameObject.activeSelf)
                 return;
-            var wPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var wPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
             var hit = Physics2D.Raycast(wPos, Vector2.zero, 1, LayerMask.GetMask("Stand"));
             if (hit.collider != null && hit.collider.gameObject == gameObject)
             {
