@@ -68,6 +68,7 @@ public class GameManager : MonoBehaviour
         arrows = GameObject.FindGameObjectsWithTag("Arrow");
 
         sellAreaMgr.SetCameraArea();
+        MoveNextArea();
     }
 
     private void Update()
@@ -188,7 +189,7 @@ public class GameManager : MonoBehaviour
     private void OnGUI()
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
-        GUIStyle style = new GUIStyle();
+        /*GUIStyle style = new GUIStyle();
 
         Rect rect = Screen.safeArea;
         style.alignment = TextAnchor.UpperLeft;
@@ -199,7 +200,7 @@ public class GameManager : MonoBehaviour
         float fps = 1.0f / deltaTime;
         string text = string.Format("{0:0.} FPS ({1:0.0} ms)", fps, ms);
 
-        GUI.Label(rect, text, style);
+        GUI.Label(rect, text, style);*/
 #endif
     }
 }
